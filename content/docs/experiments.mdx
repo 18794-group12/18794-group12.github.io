@@ -1,0 +1,57 @@
+---
+title: Experiments
+description: An initial plan for diagnosis, representation learning, and robustness evaluation.
+---
+
+## 1. establish baselines
+
+Train a ResNet-18 classifier on DRAGON-R. Extract forensic features and frozen CLIP/DINOv2 features, then fit simple probes on the same splits.
+
+Report top-1 accuracy, macro-F1, per-source accuracy, and confusion matrices. The uniform chance baseline for 25 balanced classes is 4%.
+
+## 2. measure content dependence
+
+Compare balanced and deliberately biased training conditions on a shared balanced test set. Keep sample counts, preprocessing, and training budgets fixed.
+
+Vary the strength of the prompt-source association. Measure how accuracy changes as the shortcut becomes less reliable.
+
+Compare same-prompt images across generators and different-prompt images within each generator. Use embedding distances and principal component analysis plots to inspect source and content structure.
+
+## 3. locate useful signals
+
+Compare feature families, pretrained layers, frequency bands, and image patches. Apply grayscale conversion, frequency masking, and blur as separate interventions.
+
+Plot accuracy against intervention strength. Each intervention can affect several signals, so combine these results with the controlled prompt comparisons.
+
+For patch models, report accuracy alongside patch count, patch size, parameter count, and inference cost.
+
+## 4. test the learning objective
+
+| Variant | Purpose |
+| --- | --- |
+| Classification only | Establish the learning baseline |
+| Classification + source contrast | Test consistency across prompts |
+| Classification + transformation consistency | Test consistency under edits |
+| All three terms | Test their combined effect |
+
+Compare each variant on clean images and the same corruption suite. Add feature fusion only after the individual branches show complementary behavior.
+
+## 5. stress-test robustness
+
+**Natural edits.** Test JPEG compression, resizing, cropping, Gaussian blur, and Gaussian noise at several severities. Report clean, average-corruption, and worst-corruption accuracy.
+
+**External data.** Repeat the protocol on Defactify / MS COCOAI. For direct cross-dataset classification, align shared source labels first. Evaluate unseen sources separately through unknown-source detection or few-shot retrieval.
+
+**Adversarial tests.** Use the fast gradient sign method (FGSM) and projected gradient descent (PGD) with fixed perturbation budgets. Measure attack success on initially correct images and transfer across attribution models.
+
+Compare ordinary classification attacks with attacks on a selected provenance signal. A targeted synthetic-to-real test requires a classifier trained with a real-image class.
+
+## execution order
+
+1. Audit metadata and save reproducible split manifests.
+2. Run RGB and frozen-feature baselines.
+3. Complete content-control and representation comparisons.
+4. Test the contrastive objective and its ablations.
+5. Extend to patch efficiency, corruptions, external data, and attacks.
+
+Use a fixed validation protocol and three seeds for the main comparisons. Save configurations, predictions, and per-class results for every run.

@@ -1,0 +1,44 @@
+---
+title: Method
+description: Control the comparison, identify the signal, then improve the representation.
+---
+
+## control content and source
+
+We will first audit DRAGON-R's prompt coverage and generator labels. We will keep prompt groups separate across training, validation, and testing.
+
+A balanced condition will give each generator the same prompt distribution. A controlled biased condition will deliberately associate prompt groups with different generators. Both conditions will use equal training sizes and the same balanced test set.
+
+This comparison measures sensitivity to a known content shortcut. Additional matched-prompt tests will compare sources given the same text description.
+
+We will report accuracy changes as evidence of content dependence. Prompt matching controls the text description; generators can still differ in rendered content and style.
+
+## compare representations
+
+| Representation | Initial implementation | Question |
+| --- | --- | --- |
+| RGB appearance | ResNet-18 image features | How much does ordinary visual appearance reveal? |
+| Forensic features | High-pass residuals and Fourier or discrete cosine transform statistics | Which local or frequency signals distinguish sources? |
+| Pretrained features | Frozen CLIP and DINOv2, including intermediate layers | Where is source information retained? |
+
+We will compare these representations using linear and k-nearest-neighbor probes. Shared splits, tuning budgets, and metrics will keep the comparisons consistent.
+
+We will also compare embedding distances across generators and prompts. This tests whether a representation separates sources while remaining stable across subjects.
+
+## learn source consistency
+
+For an anchor image, the proposed contrastive setup uses:
+
+- **Positive:** the same generator with a different prompt.
+- **Negative:** a different generator with the same prompt.
+- **Consistency pair:** the original image and a transformed version.
+
+We will combine source classification, source contrastive learning, and transformation consistency. Separate ablations will measure the contribution of each term.
+
+The aim is to preserve source information across content changes and ordinary edits. We will combine feature branches only when their errors or robustness profiles complement each other.
+
+## lightweight extension
+
+A patch encoder will process several small crops with shared weights, aggregate their features, and predict the source. We will vary patch size and count.
+
+This tests how much visual information attribution needs. Reconstruction features from a shared diffusion backbone provide a further comparison if the core experiments justify it.

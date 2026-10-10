@@ -1,0 +1,40 @@
+{
+  "name": "18794-group12",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --hostname 127.0.0.1 --port 3104",
+    "start": "node scripts/serve.mjs",
+    "types:check": "next typegen && tsc --noEmit",
+    "check": "npm run types:check",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "cn": "^0.4.0",
+    "fumadocs-core": "16.17.1",
+    "fumadocs-mdx": "15.4.7",
+    "fumadocs-ui": "npm:@fumadocs/base-ui@16.17.1",
+    "katex": "^0.16.47",
+    "lucide-react": "^1.50.0",
+    "next": "16.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "postcss": "^8.5.28",
+    "serve": "^14.2.6",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

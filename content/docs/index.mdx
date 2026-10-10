@@ -1,0 +1,38 @@
+---
+title: MetaTrace
+description: How much of AI image attribution comes from content, and how much comes from generator fingerprints?
+---
+
+**MetaTrace is the working title of our 18-794 Group 12 project.** We study which signals reveal the generator behind an AI-generated image.
+
+## the story
+
+Imagine an attribution model that labels anime images as generator A and photographic portraits as generator B. It may score well while learning appearance shortcuts.
+
+Now ask both generators to draw the same scene. Does the classifier still identify their sources? What happens after compression, resizing, or a change in style?
+
+This is the distinction we want to study. **Content** describes subjects and semantic cues. **Generator fingerprints** are source-related patterns in textures, residuals, frequencies, or learned features.
+
+Reliable attribution should remain useful when the depicted subject changes. Our goal is to measure dependence on content, identify useful source signals, and test their robustness.
+
+## the research logic
+
+1. **Diagnose:** compare attribution under controlled prompt and source conditions.
+2. **Locate:** test RGB, forensic features, and pretrained representations with simple probes.
+3. **Learn:** encourage source consistency across different prompts and image transformations.
+4. **Stress-test:** measure performance under edits, new data, and adversarial perturbations.
+
+The core deliverable is a controlled comparison of attribution signals. Representation learning and robustness experiments build on that comparison.
+
+## data
+
+We will start with [DRAGON-R](https://huggingface.co/datasets/lesc-unifi/dragon): approximately 25,000 training images and 10,000 test images from 25 generators. Its shared prompts support comparisons across sources.
+
+[Defactify / MS COCOAI](https://huggingface.co/datasets/Rajarshi-Roy-research/Defactify_Image_Dataset) provides an independent extension: 96,000 images across real photographs and five synthetic sources.
+
+## project plan
+
+<Cards>
+  <Card title="Method" href="/method/" description="Content controls, representation probes, and source-aware learning." />
+  <Card title="Experiments" href="/experiments/" description="Initial experiment groups, comparisons, and measurements." />
+</Cards>

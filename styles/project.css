@@ -1,0 +1,6 @@
+:root {
+  color-scheme: light;
+  --color-fd-primary: #6d48a1;
+  --color-fd-primary-foreground: #ffffff;
+}
+.katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
